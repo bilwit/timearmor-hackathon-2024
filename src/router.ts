@@ -1,5 +1,12 @@
 import express, { Router, Request, Response } from "express";
 
+interface NewCamera {
+  name: string,
+  model: string,
+  serial: string,
+  ip_address: string,
+}
+
 const router: Router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {

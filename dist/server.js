@@ -17,13 +17,13 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const cors_1 = __importDefault(require("cors"));
 const client_1 = require("@prisma/client");
-const stream_1 = require("stream");
 const router_1 = __importDefault(require("./router"));
-const websocket_1 = __importDefault(require("./websocket"));
+// import { EventEmitter } from 'stream';
+// import websocket from './websocket';
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const prisma = new client_1.PrismaClient();
-const CameraEmitter = new stream_1.EventEmitter(); // emitter to communicate to/from the cameras
+// const CameraEmitter = new EventEmitter(); // emitter to communicate to/from the cameras
 app.set('trust proxy', true);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -35,18 +35,16 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.static(path_1.default.join(__dirname, '..', 'client/dist')));
 app.use((req, _res, next) => {
     req['db'] = prisma;
-    req['CameraEmitter'] = CameraEmitter;
+    // req['CameraEmitter'] = CameraEmitter;
     return next();
 });
 app.use('/api', router_1.default);
-const server = app.listen(Number(process.env.PORT), () => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+const server = app.listen(Number(process.env.API_PORT), () => __awaiter(void 0, void 0, void 0, function* () {
     console.log('⚡️[server]: Server is running at http://localhost:' + process.env.API_PORT);
-    try {
-        // websocket server for client connections for camera communication
-        (_a = (0, websocket_1.default)(server)) === null || _a === void 0 ? void 0 : _a(CameraEmitter);
-    }
-    catch (e) {
-        console.log(e);
-    }
+    // try {
+    //   // websocket server for client connections for camera communication
+    //   websocket(server)?.(CameraEmitter);
+    // } catch (e) {
+    //   console.log(e);
+    // }
 }));

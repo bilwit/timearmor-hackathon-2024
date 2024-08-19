@@ -29,3 +29,7 @@ datasource db {
 //   id                  Int       @id @default(autoincrement())
 //   item             item[]
 // }
+
+model camera {
+  id                  Int       @id @default(autoincrement())
+}
