@@ -1,0 +1,31 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// While in development, use
+//   npx prisma migrate dev 
+// after every change in schema: https://www.prisma.io/docs/orm/prisma-migrate/workflows/development-and-production
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// model item {
+//   id                  Int       @id @default(autoincrement())
+//   created_at          DateTime  @default(now())
+//   updated_at          DateTime  @updatedAt @default(now())
+//   name                String    @unique @db.VarChar(255)
+//   relations           relations? @relation(fields: [relations_id], references: [id], onDelete: SetNull)
+//   relations_id        Int?      // relation scalar field  (used in the `@relation` attribute above)
+// }
+
+// model relations {
+//   id                  Int       @id @default(autoincrement())
+//   item             item[]
+// }
