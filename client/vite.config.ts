@@ -10,12 +10,12 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:' + process.env.API_PORT,
+        target: 'http://localhost:' + (process.env.API_PORT || 999),
         changeOrigin: true,
         secure: false,
       },
       '/ws': {
-        target: 'ws://localhost:999' + process.env.API_PORT,
+        target: 'ws://localhost:' + (process.env.API_PORT || 999),
         changeOrigin: true,
         secure: false,
       },
