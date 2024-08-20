@@ -1,6 +1,7 @@
 import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import logo from './assets/logo_timearmor.webp';
+import Cameras from './Cameras';
 
 function App() {
   const [opened, { toggle }] = useDisclosure();
@@ -28,11 +29,11 @@ function App() {
         </AppShell.Navbar>
 
         <AppShell.Main>
-          hello world
+          <Cameras />
         </AppShell.Main>
       </AppShell>
     </MantineProvider>
   );
 }
 
-export default App
+export default App;
