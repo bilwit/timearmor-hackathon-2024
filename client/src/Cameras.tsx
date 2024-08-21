@@ -1,6 +1,11 @@
 // UI Framework Components: https://mantine.dev/core/modal/
 
-function Cameras() {  
+import { useContext } from "react";
+import WsContext from "./wsContext";
+
+function Cameras() {
+  const wsStore = useContext(WsContext);
+
   return (
     <>
       hello world

@@ -20,17 +20,17 @@ function initialize(expressServer) {
             if (websocketServer) {
                 websocketServer.on('connection', (WsClientConnection, _connectionRequest) => {
                     console.log('+ Client Connected');
-                    WsClientConnection.addEventListener('message', (event) => {
-                        if (event) {
-                            const eventData = JSON.parse(event.data);
-                            switch (eventData === null || eventData === void 0 ? void 0 : eventData.message) {
-                                case 'hello':
-                                    WsClientConnection.send(JSON.stringify({ message: 'world' }));
-                                default:
-                                    break;
-                            }
-                        }
-                    });
+                    // WsClientConnection.addEventListener('message', (event: any) => {
+                    //   if (event) {
+                    //     const eventData = JSON.parse(event.data);
+                    //     switch (eventData?.message) {
+                    //       case 'status':
+                    //         WsClientConnection.send(JSON.stringify({ message: 'connected' }));
+                    //       default:
+                    //         break;
+                    //     }
+                    //   }
+                    // });
                 });
             }
         };

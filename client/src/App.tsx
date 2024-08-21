@@ -2,8 +2,11 @@ import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core
 import { useDisclosure } from '@mantine/hooks';
 import logo from './assets/logo_timearmor.webp';
 import Cameras from './Cameras';
+import WsContext from './wsContext';
+import useWebSocket from './useWebSocket';
 
 function App() {
+  const { isConnected, socket } = useWebSocket();
   const [opened, { toggle }] = useDisclosure();
   
   return (
@@ -29,7 +32,9 @@ function App() {
         </AppShell.Navbar>
 
         <AppShell.Main>
-          <Cameras />
+          <WsContext.Provider value={{ isConnected, socket }}>
+            <Cameras />
+          </WsContext.Provider>
         </AppShell.Main>
       </AppShell>
     </MantineProvider>
