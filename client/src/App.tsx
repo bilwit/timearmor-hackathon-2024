@@ -4,6 +4,7 @@ import logo from './assets/logo_timearmor.webp';
 import Cameras from './Cameras';
 import WsContext from './wsContext';
 import useWebSocket from './useWebSocket';
+import './index.css';
 
 function App() {
   const { isConnected, socket } = useWebSocket();
@@ -21,10 +22,10 @@ function App() {
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <img src={logo} height={60} />
             Hackathon 2024
-          </Group>         
+          </Group>
         </AppShell.Header>
 
-        <AppShell.Navbar p="md">
+        <AppShell.Navbar p="md" className='blue'>
           <NavLink 
             label="IP Cameras" 
             active={true}
