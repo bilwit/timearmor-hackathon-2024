@@ -25,7 +25,7 @@ function App() {
           </Group>
         </AppShell.Header>
 
-        <AppShell.Navbar p="md" className='blue'>
+        <AppShell.Navbar p="md">
           <NavLink 
             label="IP Cameras" 
             active={true}
