@@ -8,7 +8,6 @@ function Cameras() {
 
   return (
     <>
-      hello world
     </>
   );
 }
