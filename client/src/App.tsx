@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core';
+import { AppShell, Burger, Group, MantineProvider, NavLink, UnstyledButton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import logo from './assets/logo_timearmor.webp';
 import Cameras from './Cameras';
@@ -21,16 +21,14 @@ function App() {
           <Group h="100%" px="md">
             <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
             <img src={logo} height={60} />
-            Hackathon 2024
+            <b>Hackathon 2024</b>
+            <Group ml="xl" gap={0} visibleFrom="sm">
+            <NavLink 
+            label="IP Cameras" 
+          />
+            </Group>
           </Group>
         </AppShell.Header>
-
-        <AppShell.Navbar p="md">
-          <NavLink 
-            label="IP Cameras" 
-            active={true}
-          />
-        </AppShell.Navbar>
 
         <AppShell.Main>
           <WsContext.Provider value={{ isConnected, socket }}>
