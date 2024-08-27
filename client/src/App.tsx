@@ -1,4 +1,4 @@
-import { AppShell, Burger, Group, MantineProvider, NavLink, UnstyledButton } from '@mantine/core';
+import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import logo from './assets/logo_timearmor.webp';
 import Cameras from './Cameras';
