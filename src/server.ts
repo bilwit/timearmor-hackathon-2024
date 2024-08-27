@@ -3,10 +3,11 @@ import dotenv from 'dotenv';
 import path from 'path';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
-import router from './router';
+import routeCameras from './routes/cameras';
+import routeStreams from './routes/streams';
 
 import { EventEmitter } from 'stream';
-import websocket from './websocket';
+// import websocket from './websocket';
 
 dotenv.config();
 
@@ -30,16 +31,17 @@ app.use((req: any, _res, next) => { // database connection & emitter accessible 
   req['CameraEmitter'] = CameraEmitter;
   return next();
 });
-app.use('/api', router);
+app.use('/api/cameras', routeCameras);
+app.use('/api/streams', routeStreams);
 
 const server = app.listen(Number(process.env.API_PORT || 999), async () => {
   console.log('⚡️[server]: Server is running at http://localhost:' + (process.env.API_PORT || 999));
 
-  try {
+  // try {
     // websocket server for client connections for camera communication
-    websocket(server)?.(CameraEmitter);
-  } catch (e) {
-    console.log(e);
-  }
+    // websocket(server)?.(CameraEmitter);
+  // } catch (e) {
+  //   console.log(e);
+  // }
   
 });

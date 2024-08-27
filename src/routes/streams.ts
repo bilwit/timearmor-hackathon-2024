@@ -1,11 +1,11 @@
 import express, { Router, Request, Response } from "express";
 import encode from "./utils/cameraStream";
 
-const CAMERA_ADDRESS = 'http://192.168.3.254:8081';
-
 const router: Router = express.Router();
 
-router.get('/stream/:id', (req: Request, res: Response) => {
+const CAMERA_ADDRESS = 'http://192.168.3.254:8081';
+
+router.get('/streams/:id', (req: Request, res: Response) => {
   try {
     // TODO: Cache the first encoded stream and clone it, piped to each new request
     // rather than consuming camera feed and then spawning new encoded processes each time 

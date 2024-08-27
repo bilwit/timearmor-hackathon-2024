@@ -17,19 +17,24 @@ datasource db {
 }
 
 // model item {
-//   id                  Int       @id @default(autoincrement())
-//   created_at          DateTime  @default(now())
-//   updated_at          DateTime  @updatedAt @default(now())
-//   name                String    @unique @db.VarChar(255)
-//   relations           relations? @relation(fields: [relations_id], references: [id], onDelete: SetNull)
-//   relations_id        Int?      // relation scalar field  (used in the `@relation` attribute above)
+//   id                 Int       @id @default(autoincrement())
+//   created_at         DateTime  @default(now())
+//   updated_at         DateTime  @updatedAt @default(now())
+//   name               String    @unique @db.VarChar(255)
+//   relation           relation? @relation(fields: [relations_id], references: [id], onDelete: SetNull)
+//   relation_id        Int?      // relation scalar field  (used in the `@relation` attribute above)
 // }
 
-// model relations {
-//   id                  Int       @id @default(autoincrement())
-//   item             item[]
+// model relation {
+//   id                 Int       @id @default(autoincrement())
+//   item               item[]
 // }
 
 model camera {
-  id                  Int       @id @default(autoincrement())
+  id                   Int       @id @default(autoincrement())
+  created_at           DateTime  @default(now())
+  updated_at           DateTime  @updatedAt @default(now())
+  name                 String    @unique @db.VarChar(255)
+  model                String    @db.VarChar(255)
+  url_mjpeg            String    @db.VarChar(255)
 }
