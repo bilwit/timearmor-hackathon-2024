@@ -1,4 +1,4 @@
-export default function initProcess(cameraAddress: string) {
+export default function encode(cameraAddress: string) {
   const spawn = require('child_process').spawn;    
 
   const process = spawn(
