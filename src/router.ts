@@ -36,10 +36,9 @@ router.get('/stream/:id', (req: Request, res: Response) => {
       camStream.observers.push(readStream);
       console.log('New stream');
     
-      const stream = streamProxies.get(req.params.id);
       // TODO: delete the readstreamclone observer based on connected ws clients & make them 
       // identifiably stored
-      stream.observers[stream.observers.length -1].pipe(res);
+      camStream.observers.at(-1).pipe(res);
     }
 
   } catch (err) {
