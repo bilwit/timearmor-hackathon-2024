@@ -1,5 +1,5 @@
 import WebSocket, { EventEmitter } from "ws";
-import { Server } from "http";
+import { request, Server } from "http";
 
 export default function initialize(expressServer: Server) {
   try {
@@ -16,6 +16,8 @@ export default function initialize(expressServer: Server) {
 
     return (CameraEmitter: EventEmitter) => {
       if (websocketServer) {
+
+        // http://192.168.3.254:8081/
 
         websocketServer.on('connection', (WsClientConnection, _connectionRequest) => {
           console.log('+ Client Connected');
@@ -34,6 +36,10 @@ export default function initialize(expressServer: Server) {
           //   }
           // });
     
+        });
+
+        websocketServer.on('close', () => {
+          console.log('+ Client Disconnected');
         });
       }
     };

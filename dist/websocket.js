@@ -18,6 +18,7 @@ function initialize(expressServer) {
         });
         return (CameraEmitter) => {
             if (websocketServer) {
+                // http://192.168.3.254:8081/
                 websocketServer.on('connection', (WsClientConnection, _connectionRequest) => {
                     console.log('+ Client Connected');
                     // WsClientConnection.addEventListener('message', (event: any) => {
@@ -31,6 +32,9 @@ function initialize(expressServer) {
                     //     }
                     //   }
                     // });
+                });
+                websocketServer.on('close', () => {
+                    console.log('+ Client Disconnected');
                 });
             }
         };
