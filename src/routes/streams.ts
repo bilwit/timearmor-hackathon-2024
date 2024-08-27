@@ -3,28 +3,40 @@ import encode from "./utils/cameraStream";
 
 const router: Router = express.Router();
 
-const CAMERA_ADDRESS = 'http://192.168.3.254:8081';
-
-router.get('/streams/:id', (req: Request, res: Response) => {
+router.get('/streams/:id', async (req: Request, res: Response) => {
   try {
-    // TODO: Cache the first encoded stream and clone it, piped to each new request
-    // rather than consuming camera feed and then spawning new encoded processes each time 
-    const camStream = encode(CAMERA_ADDRESS);
-    if (camStream) {
-      res.writeHead(206, {
-        'Date': (new Date()).toUTCString(),
-        'Connection': 'Upgrade, Keep-Alive',
-        'Cache-Control': 'private',
-        'Content-Type': 'video/webm',
-        'Server': 'CustomStreamer/0.0.1',
-      });
+    const camera = await req.db.camera.findFirst({
+      where: {
+        id: Number(req.params.id),
+      },
+      select: {
+        url_mjpeg: true,
+      }
+    });
 
-      camStream.pipe(res);
+    if (camera?.url_mjpeg) {
+      // TODO: Cache the first encoded stream and clone it, piped to each new request
+      // rather than consuming camera feed and then spawning new encoded processes each time 
+      const camStream = encode(camera?.url_mjpeg);
+      if (camStream) {
+        res.writeHead(206, {
+          'Date': (new Date()).toUTCString(),
+          'Connection': 'Upgrade, Keep-Alive',
+          'Cache-Control': 'private',
+          'Content-Type': 'video/webm',
+          'Server': 'CustomStreamer/0.0.1',
+        });
+
+        camStream.pipe(res);
+      } else {
+        throw true;
+      }
+    } else {
+      throw true;
     }
-
   } catch (err) {
     console.log(err);
-    res.status(500).send(true);
+    res.status(500).send({ msg: 'Could not get camera feed' });
   }
 });
 
