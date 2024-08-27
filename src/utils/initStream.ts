@@ -20,15 +20,16 @@ export default function initStream(id: string, cb: any) {
 
   cb(process);
 
-  process.stderr.setEncoding('utf8');      
-  process.stderr.on('data', (data: any) => {
-    console.log(data);
-    if (data.includes('Error')) {
-      process.kill('SIGINT');
-    }
-  });
+  // verbose debugging messages
+  // process.stderr.setEncoding('utf8');      
+  // process.stderr.on('data', (data: any) => {
+  //   console.log(data);
+  //   if (data.includes('Error')) {
+  //     process.kill('SIGINT');
+  //   }
+  // });
 
-  console.log('new process')
+  console.log('New ffmpeg process created')
 
   return true;
 }

@@ -29,12 +29,16 @@ router.get('/stream/:id', (req: Request, res: Response) => {
         'Server': 'CustomStreamer/0.0.1',
       });
 
+      // BUG: once the original process is consumed, the readablestreamclone still tries 
+      // to consume the used process
       const readStream = new ReadableStreamClone(camStream.process.stdout);
       
       camStream.observers.push(readStream);
-      console.log('new stream')
+      console.log('New stream');
     
       const stream = streamProxies.get(req.params.id);
+      // TODO: delete the readstreamclone observer based on connected ws clients & make them 
+      // identifiably stored
       stream.observers[stream.observers.length -1].pipe(res);
     }
 
