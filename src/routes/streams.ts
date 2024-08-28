@@ -3,7 +3,7 @@ import encode from "./utils/cameraStream";
 
 const router: Router = express.Router();
 
-router.get('/streams/:id', async (req: Request, res: Response) => {
+router.get('/:id', async (req: Request, res: Response) => {
   try {
     const camera = await req.db.camera.findFirst({
       where: {

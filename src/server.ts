@@ -13,7 +13,7 @@ dotenv.config();
 
 const app: Express = express();        
 const prisma = new PrismaClient();
-const CameraEmitter = new EventEmitter(); // emitter to communicate to/from the cameras
+// const CameraEmitter = new EventEmitter(); // emitter to communicate to/from the cameras
 
 app.set('trust proxy', true);
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'client/dist')));
 app.use((req: any, _res, next) => { // database connection & emitter accessible from api router
   req['db'] = prisma;
-  req['CameraEmitter'] = CameraEmitter;
+  // req['CameraEmitter'] = CameraEmitter;
   return next();
 });
 app.use('/api/cameras', routeCameras);

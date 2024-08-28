@@ -4,7 +4,7 @@ import { Prisma, camera } from "@prisma/client";
 
 const router: Router = express.Router();
 
-router.get('/cameras', async (req: Request, res: Response) => {
+router.get('/', async (req: Request, res: Response) => {
   try {
     const cameras = await req.db.camera.findMany({});
 
@@ -20,7 +20,7 @@ router.get('/cameras', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/cameras', async (req: Request, res: Response) => {
+router.post('/', async (req: Request, res: Response) => {
   try {
     const input = JSON.parse(req.body);
     const newData: NewCamera = {
@@ -44,7 +44,7 @@ router.post('/cameras', async (req: Request, res: Response) => {
   }
 });
 
-router.delete('/cameras/:id', async (req: Request, res: Response) => {
+router.delete('/:id', async (req: Request, res: Response) => {
   try {
     const camera: camera = await req.db.camera.delete({
       where: {
@@ -64,7 +64,7 @@ router.delete('/cameras/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/cameras/:id', async (req: Request, res: Response) => {
+router.patch('/:id', async (req: Request, res: Response) => {
   try {
     const input = JSON.parse(req.body);
     const updatedData: UpdatedCamera = {};
