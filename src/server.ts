@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 import routeCameras from './routes/cameras';
 import routeStreams from './routes/streams';
 
-import { EventEmitter } from 'stream';
+// import { EventEmitter } from 'stream';
 // import websocket from './websocket';
 
 dotenv.config();

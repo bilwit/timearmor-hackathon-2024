@@ -1,7 +1,9 @@
 import express, { Router, Request, Response } from "express";
 import { NewCamera, UpdatedCamera } from "../..";
 import { Prisma, camera } from "@prisma/client";
+import multer from 'multer';
 
+const parser = multer();
 const router: Router = express.Router();
 
 router.get('/', async (req: Request, res: Response) => {
@@ -20,13 +22,13 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-router.post('/', async (req: Request, res: Response) => {
+router.post('/', parser.none(), async (req: Request, res: Response) => {
+  console.log(req.body)
   try {
-    const input = JSON.parse(req.body);
     const newData: NewCamera = {
-      name: input?.name,
-      model: input?.model,
-      url_mjpeg: input?.url_mjpeg,
+      name: removeQuotationMarks(req.body?.name),
+      model: removeQuotationMarks(req.body?.model),
+      url_mjpeg: removeQuotationMarks(req.body?.url_mjpeg),
     }
     const newCamera = await req.db.camera.create({
       data: newData,
@@ -64,21 +66,20 @@ router.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
-router.patch('/:id', async (req: Request, res: Response) => {
+router.patch('/:id', parser.none(), async (req: Request, res: Response) => {
   try {
-    const input = JSON.parse(req.body);
     const updatedData: UpdatedCamera = {};
 
-    if (input?.name) {
-      updatedData.name = input?.name;
+    if (req?.body?.name) {
+      updatedData.name = removeQuotationMarks(req.body?.name);
     }
 
-    if (input?.model) {
-      updatedData.model = input?.model;
+    if (req?.body?.model) {
+      updatedData.model = removeQuotationMarks(req.body?.model);
     }
 
-    if (input?.url_mjpeg) {
-      updatedData.url_mjpeg = input?.url_mjpeg;
+    if (req?.body?.url_mjpeg) {
+      updatedData.url_mjpeg = removeQuotationMarks(req.body?.url_mjpeg);
     }
     
     const updatedCamera = await req.db.camera.update({
@@ -113,6 +114,16 @@ function errorHandler(e: any, res: Response, msg: string) {
   }
 
   return res.status(500).json({ msg });
+}
+
+function removeQuotationMarks(str: string) {
+  if (str.at(-1) === '"') {
+    str = str.slice(0, -1); 
+  }
+  if (str.at(0) === '"') {
+    str = str.slice(1, str.length - 1); 
+  }
+  return str;
 }
 
 export default router;
