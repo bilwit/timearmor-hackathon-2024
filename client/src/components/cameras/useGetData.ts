@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ResponseDataCamera, Camera } from '../..';
+import { ResponseDataCamera, Camera } from '../../../..';
 
 function useGetData(endpoint: string, id?: string | null): { 
   isLoading: boolean,

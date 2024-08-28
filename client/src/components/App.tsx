@@ -1,10 +1,10 @@
 import { AppShell, Burger, Group, MantineProvider, NavLink } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import logo from './assets/logo_timearmor.webp';
-import Cameras from './Cameras';
+import logo from '../assets/logo_timearmor.webp';
+import Cameras from './cameras/Cameras';
 // import WsContext from './wsContext';
 // import useWebSocket from './useWebSocket';
-import './index.css';
+import '../index.css';
 
 function App() {
   // const { isConnected, socket } = useWebSocket();
