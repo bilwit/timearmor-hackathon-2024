@@ -99,7 +99,7 @@ function Properties(props: Props) {
 
       if (result) {
         const responseJson = await result.json();
-        if (responseJson.success && responseJson?.data?.[0]?.id) {
+        if (responseJson?.data?.[0]?.id) {
           // remove from main page list
           setData((prev) => prev.filter((item) => item.id !== responseJson.data[0].id));
 

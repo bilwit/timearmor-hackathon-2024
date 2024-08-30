@@ -24,7 +24,6 @@ router.get('/', async (req: Request, res: Response) => {
 });
 
 router.post('/', parser.none(), async (req: Request, res: Response) => {
-  console.log(req.body)
   try {
     const newData: NewCamera = {
       name: removeQuotationMarks(req.body?.name),
@@ -55,7 +54,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
       },
     });
 
-    if (camera) {
+    if (camera?.id) {
       return res.status(200).json({
         data: [{ id: camera.id }],
       });
